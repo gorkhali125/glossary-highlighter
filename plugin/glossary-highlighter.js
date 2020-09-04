@@ -9,6 +9,18 @@
  * https://opensource.org/licenses/MIT
  */
 
-(function () {
+(function (jQuery) {
 
-})();
+    //Main Highlight Function
+    jQuery.fn.highlight = function (str, className) {
+        if (str.search(/[\[\]?*+|{}\\()@.\n\r]/) == - 1) {
+            var regex = new RegExp(str, "gi");
+            return this.each(function () {
+                jQuery(this).html(jQuery(this).html().replace(regex, function (match) {
+                    return "<span class=\"" + className + "\">" + match + "</span>";
+                }));
+            });
+        }
+    };
+
+})(jQuery);
