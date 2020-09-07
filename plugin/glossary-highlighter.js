@@ -23,5 +23,23 @@
             jQuery('<div class="holder"></div>').appendTo('.body');
             jQuery('span.highlight').css({ 'background-color': '#DDDCDA', 'padding': '1px', 'border-radius': '1px' });
         }
+
+        jQuery('span.highlight').on('mouseover', function (e) {
+            jQuery(this).css('cursor', 'wait');
+            var word = jQuery.trim(jQuery(this).html());
+            if (word != '') {
+                jQuery('span.highlight').css('cursor', 'default');
+                var glossary = glossaries[word];
+                if (glossary === null) {
+                    jQuery('.holder').hide();
+                } else {
+                    jQuery('.holder').text(glossary);
+                    jQuery('.holder').show();
+                    jQuery('.holder').css({ top: e.pageY, left: e.pageX, position: 'absolute', background: '#000000' });
+                    jQuery('.holder').css({ color: '#ffffff', padding: '5px', 'border-radius': '5px' });
+                }
+            }
+        });
+
     });
 })(jQuery);
